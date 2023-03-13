@@ -12,6 +12,7 @@ import com.qlive.pkservice.QPKSession
 import com.qlive.linkmicservice.QLinkMicService
 import com.qlive.uikitcore.QKitViewBindingFrameLayout
 import com.qlive.uikitcore.QKitViewBindingFrameMergeLayout
+import com.qlive.uikitcore.UIJsonConfigurator
 import com.qlive.uikitcore.dialog.FinalDialogFragment
 import com.qlive.uikitcore.dialog.LoadingDialog
 import com.qlive.uikitcore.ext.asToast

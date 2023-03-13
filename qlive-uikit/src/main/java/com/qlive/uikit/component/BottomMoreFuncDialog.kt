@@ -16,10 +16,7 @@ import com.qlive.sdk.QLive
 import com.qlive.uikit.R
 import com.qlive.uikit.databinding.KitDialogAnchorMoreFuncBinding
 import com.qlive.uikit.databinding.KitDialogPlayerMoreFuncBinding
-import com.qlive.uikitcore.BeautyHook
-import com.qlive.uikitcore.QKitImageView
-import com.qlive.uikitcore.QLiveUIKitContext
-import com.qlive.uikitcore.TestUIEvent
+import com.qlive.uikitcore.*
 import com.qlive.uikitcore.dialog.ViewBindingDialogFragment
 import com.qlive.uikitcore.ext.setDoubleCheckClickListener
 import com.qlive.uikitgift.GiftDialog
@@ -153,6 +150,9 @@ class PlayerBottomMoreFuncDialog(
         }
 
         mStartLinkHandler?.attachView(binding.llLink)
+
+        UIJsonConfigurator.checkEnable(UIJsonConfigurator.key_mic, binding.llLink)
+        UIJsonConfigurator.checkEnable(UIJsonConfigurator.key_gift, binding.llGift)
     }
 
     fun release() {

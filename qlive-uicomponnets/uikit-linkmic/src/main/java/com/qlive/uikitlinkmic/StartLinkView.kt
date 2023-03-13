@@ -17,6 +17,7 @@ import com.qlive.pkservice.QPKService
 import com.qlive.uikitcore.QKitFrameLayout
 import com.qlive.uikitcore.QKitImageView
 import com.qlive.uikitcore.QLiveUIKitContext
+import com.qlive.uikitcore.UIJsonConfigurator
 import com.qlive.uikitcore.dialog.FinalDialogFragment
 import com.qlive.uikitcore.dialog.LoadingDialog
 import com.qlive.uikitcore.ext.asToast
@@ -183,4 +184,5 @@ class StartLinkView : QKitImageView {
         mStartLinkHandler.release()
         super.onDestroyed()
     }
+
 }

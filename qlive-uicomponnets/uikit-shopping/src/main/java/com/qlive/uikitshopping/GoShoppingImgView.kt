@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import com.qlive.core.QClientType
 import com.qlive.uikitcore.QKitImageView
+import com.qlive.uikitcore.UIJsonConfigurator
 
 /**
  * 购物车icon
@@ -27,4 +28,5 @@ class GoShoppingImgView : QKitImageView {
             }
         }
     }
+
 }

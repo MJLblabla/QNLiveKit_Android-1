@@ -76,10 +76,12 @@ class KITLiveInflaterFactory(
             }
         }
         if (view is QLiveComponent) {
+            if (UIJsonConfigurator.checkEnable(view)) {
+                (view as QLiveComponent).attachKitContext(kitContext)
+                (view as QLiveComponent).attachLiveClient(roomClient)
+                mComponents.add(view)
+            }
             //   QLiveLogUtil.d("KITInflaterFactory", "onCreateView " + name + " attachKitContext ")
-            (view as QLiveComponent).attachKitContext(kitContext)
-            (view as QLiveComponent).attachLiveClient(roomClient)
-            mComponents.add(view)
         }
         return view
     }

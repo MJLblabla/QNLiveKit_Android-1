@@ -7,20 +7,15 @@ import com.qlive.uikit.RoomListActivity.Companion.start
 import com.qlive.sdk.QLiveUIKit
 import com.qlive.sdk.QPage
 import com.qlive.uikit.component.*
-import com.qlive.uikitcore.KITInflaterFactory
-import com.qlive.uikitcore.KITLiveInflaterFactory
-import com.qlive.uikitcore.KITRoomDependsInflaterFactory
-import com.qlive.uikitcore.QKitImageView
+import com.qlive.uikitcore.*
 import com.qlive.uikitdanmaku.DanmakuTrackManagerView
 import com.qlive.uikitdanmaku.SendDanmakuView
+import com.qlive.uikitlike.LikeView
 import com.qlive.uikitlinkmic.FuncCPTBeInvitedLinkMicMonitor
 import com.qlive.uikitlinkmic.FuncCPTLinkMicApplyMonitor
 import com.qlive.uikitlinkmic.MicLinkersView
 import com.qlive.uikitlinkmic.StartLinkView
-import com.qlive.uikitpk.FuncCPTPKApplyMonitor
-import com.qlive.uikitpk.PKAnchorPreview
-import com.qlive.uikitpk.PKCoverView
-import com.qlive.uikitpk.PKPlayerPreview
+import com.qlive.uikitpk.*
 import com.qlive.uikitpublicchat.PublicChatView
 import com.qlive.uikitpublicchat.RoomNoticeView
 import com.qlive.uikitshopping.ExplainingQItemCardView
@@ -34,7 +29,7 @@ import com.qlive.uikituser.*
  * @property appContext
  * @constructor Create empty Q live u i kit impl
  */
-class QLiveUIKitImpl(val appContext: Context) : QLiveUIKit {
+class QLiveUIKitImpl(private val appContext: Context) : QLiveUIKit {
 
     companion object {
         private val mRoomListPage = RoomListPage()
@@ -44,6 +39,7 @@ class QLiveUIKitImpl(val appContext: Context) : QLiveUIKit {
     }
 
     init {
+        UIJsonConfigurator.init(appContext)
         QInnerVideoFrameHook.checkHasHooker()
         if (QInnerVideoFrameHook.isEnable) {
             //如果依赖的内置美颜 初始化美颜插件
@@ -60,6 +56,16 @@ class QLiveUIKitImpl(val appContext: Context) : QLiveUIKit {
                 else -> null
             }
         }
+
+        UIJsonConfigurator.uiJsonConfigNameMap.apply {
+            put(StartPKView::class.java.canonicalName!!, UIJsonConfigurator.key_relay)
+            put(StartLinkView::class.java.canonicalName!!, UIJsonConfigurator.key_mic)
+            put(GoShoppingImgView::class.java.canonicalName!!, UIJsonConfigurator.key_item)
+            put(SendDanmakuView::class.java.canonicalName!!, UIJsonConfigurator.key_bulletScreen)
+            put(LikeView::class.java.canonicalName!!, UIJsonConfigurator.key_like)
+            put(RoomNoticeView::class.java.canonicalName!!, UIJsonConfigurator.key_announcement)
+        }
+
         KITLiveInflaterFactory.checkCreateView = { name: String,
                                                    context: Context,
                                                    attrs: AttributeSet
@@ -130,9 +136,15 @@ class QLiveUIKitImpl(val appContext: Context) : QLiveUIKit {
                 CloseRoomView::class.java.canonicalName -> CloseRoomView(context, attrs)
                 StartLinkView::class.java.canonicalName -> StartLinkView(context, attrs)
                 PKPlayerPreview::class.java.canonicalName -> PKPlayerPreview(context, attrs)
-                BottomMoreFuncButton::class.java.canonicalName -> BottomMoreFuncButton(context, attrs)
+                BottomMoreFuncButton::class.java.canonicalName -> BottomMoreFuncButton(
+                    context,
+                    attrs
+                )
                 LiveStatisticsView::class.java.canonicalName -> LiveStatisticsView(context, attrs)
-                AnchorStartTrailerLiveView::class.java.canonicalName -> AnchorStartTrailerLiveView(context, attrs)
+                AnchorStartTrailerLiveView::class.java.canonicalName -> AnchorStartTrailerLiveView(
+                    context,
+                    attrs
+                )
                 else -> null
             }
         }
